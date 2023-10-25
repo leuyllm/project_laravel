@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class FrontPageController extends Controller
 {
     //
     public function index(){
-        return view('front_home');
+        $product=DB::table('items')->get();/*get()  */
+        return view('front_home',compact('product'));
     }
 
     public function about(){
@@ -20,8 +22,9 @@ class FrontPageController extends Controller
         return view('front_service',compact("data"));
     }
     public function menu(){
+        $product=DB::table('items')->get();
         $data="Food Menu";
-        return view('front_menu',compact("data"));
+        return view('front_menu',compact("data","product"));
     }
     public function booking(){
         $data="Booking";
